@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "911241649370",
+    "project_id": "parking-pfe-5f4c2",
+    "storage_bucket": "parking-pfe-5f4c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911241649370:android:fa04c4baf3aefbe42499e3",
+        "android_client_info": {
+          "package_name": "com.example.parking_booking_pfe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911241649370-hk03n8jmmeo4a4dlq5ev1t7c4d98ll73.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.parking_booking_pfe",
+            "certificate_hash": "b0ac48ba4f6896482cbe8207f2ba1f459d30ee46"
+          }
+        },
+        {
+          "client_id": "911241649370-jp5f99e7eeo9n7d6ne2rp8jrbctd2tbt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu8dHZ70AXjnxQqgTvhKnS9T9hNV7lcqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911241649370-ddcfbpf7e4tmsqbu7j11ta5rvcmesdha.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911241649370:android:87ded80b722569e32499e3",
+        "android_client_info": {
+          "package_name": "com.example.pfe_parking_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911241649370-jp5f99e7eeo9n7d6ne2rp8jrbctd2tbt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu8dHZ70AXjnxQqgTvhKnS9T9hNV7lcqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911241649370-ddcfbpf7e4tmsqbu7j11ta5rvcmesdha.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
