@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // To parse this JSON data, do
 //
 //     final airoport = airoportFromJson(jsonString);
@@ -33,10 +34,10 @@ class Parking {
   Parking({
     required this.name,
     required this.price,
-    required this.location,
-    required this.floors,
     required this.id,
     required this.saved,
+    required this.location,
+    required this.floors,
   });
 
   factory Parking.fromJson(Map<String, dynamic> json) => Parking(

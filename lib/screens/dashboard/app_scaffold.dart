@@ -15,14 +15,14 @@ class _AppScaffoldState extends State<AppScaffold> {
       case 1:
         return context.go('/users');
       default:
-        return context.go('/parkings');
+        return context.go('/airoports');
     }
   }
 
   int _calculateSelectedIndex(BuildContext context) {
     final GoRouter route = GoRouter.of(context);
     final String location = route.location;
-    if (location.startsWith('/parkings')) {
+    if (location.startsWith('/airoports')) {
       return 0;
     }
 
@@ -45,7 +45,8 @@ class _AppScaffoldState extends State<AppScaffold> {
         selectedItemColor: Theme.of(context).colorScheme.primary,
         elevation: 1,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Parkings'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.dashboard), label: 'Airoports'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Users'),
         ],
       ),

@@ -76,46 +76,56 @@ class NormalLogin extends HookWidget {
                   },
                 ),
                 SizedBox(height: 42.h),
-                CustomButton(
-                  onPress: () async {
-                    // context.go('/map');
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                      final auth = await FireBase.signInWithEmailAndPassword(
-                          username: username, password: password);
+                HookBuilder(builder: (context) {
+                  final isLoading = useState<bool>(false);
+                  if (isLoading.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return CustomButton(
+                    onPress: () async {
+                      // context.go('/map');
+                      if (formKey.currentState!.validate()) {
+                        formKey.currentState!.save();
+                        isLoading.value = true;
+                        final auth = await FireBase.signInWithEmailAndPassword(
+                            username: username, password: password);
 
-                      if (auth == null) {
-                        final materialBanner = MaterialBanner(
-                          actions: const [SizedBox.shrink()],
+                        if (auth == null) {
+                          isLoading.value = false;
+                          final materialBanner = MaterialBanner(
+                            actions: const [SizedBox.shrink()],
 
-                          /// need to set following properties for best effect of awesome_snackbar_content
-                          elevation: 0,
-                          backgroundColor: Colors.transparent,
-                          content: AwesomeSnackbarContent(
-                            title: 'On Snap!',
-                            message:
-                                'This is an example error message that will be shown in the body of snackbar!',
+                            /// need to set following properties for best effect of awesome_snackbar_content
+                            elevation: 0,
+                            backgroundColor: Colors.transparent,
+                            content: AwesomeSnackbarContent(
+                              title: 'On Snap!',
+                              message:
+                                  'This is an example error message that will be shown in the body of snackbar!',
 
-                            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-                            contentType: ContentType.failure,
-                            inMaterialBanner: true,
-                          ),
-                        );
+                              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                              contentType: ContentType.failure,
+                              inMaterialBanner: true,
+                            ),
+                          );
 
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context)
-                            ..hideCurrentMaterialBanner()
-                            ..showMaterialBanner(materialBanner);
-                        }
-                      } else {
-                        if (context.mounted) {
-                          context.go('/parkings');
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentMaterialBanner()
+                              ..showMaterialBanner(materialBanner);
+                          }
+                        } else {
+                          if (context.mounted) {
+                            context.go('/parkings');
+                          }
                         }
                       }
-                    }
-                  },
-                  child: const Text('Sign in'),
-                ),
+                    },
+                    child: const Text('Sign in'),
+                  );
+                }),
                 SizedBox(height: 42.h),
                 Text(
                   'Forgot the password?',
