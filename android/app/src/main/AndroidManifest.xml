@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.pfe_parking_admin">
     <application
         android:label="pfe_parking_admin"
         android:name="${applicationName}"
@@ -29,5 +29,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCWqLsuRxWCPY87PcpR3SuAioM5VaCkAwc"/>
+
     </application>
 </manifest>
