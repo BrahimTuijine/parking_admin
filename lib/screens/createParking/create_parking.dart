@@ -47,12 +47,18 @@ class CreateParking extends HookWidget {
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 200,
+                SizedBox(
+                  height: 40.h,
                 ),
                 CustomField(
                   hint: 'Parking name',
-                  prefixIc: Icons.text_format,
+                  prefixIc: Icons.local_parking,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "can not be empty";
+                    }
+                    return null;
+                  },
                   onSaved: (name) {
                     parkingData['name'] = name;
                   },
@@ -62,9 +68,17 @@ class CreateParking extends HookWidget {
                 ),
                 CustomField(
                   hint: 'Price',
-                  prefixIc: Icons.text_format,
+                  prefixIc: Icons.attach_money_sharp,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "can not be empty";
+                    } else if (double.tryParse(value) == null) {
+                      return 'invalid price value';
+                    }
+                    return null;
+                  },
                   onSaved: (price) {
-                    parkingData['price'] = price;
+                    parkingData['price'] = double.parse(price!);
                   },
                 ),
                 SizedBox(
@@ -72,11 +86,20 @@ class CreateParking extends HookWidget {
                 ),
                 CustomField(
                   hint: 'location',
-                  prefixIc: Icons.text_format,
+                  prefixIc: Icons.location_on_outlined,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "can not be empty";
+                    }
+                    return null;
+                  },
                   onSaved: (parkingLocation) async {
                     List<Location> locations =
                         await locationFromAddress(parkingLocation!);
-                    print(locations);
+                    parkingData['location'] = {
+                      'lat': locations[0].latitude,
+                      'lng': locations[0].longitude
+                    };
                   },
                 ),
                 SizedBox(

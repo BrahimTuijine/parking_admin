@@ -4,10 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:pfe_parking_admin/models/parking_data.dart';
 import 'package:pfe_parking_admin/screens/airopors/airoport_list.dart';
 import 'package:pfe_parking_admin/screens/createParking/create_parking.dart';
+import 'package:pfe_parking_admin/screens/createUser/create_user.dart';
 import 'package:pfe_parking_admin/screens/dashboard/app_scaffold.dart';
 import 'package:pfe_parking_admin/screens/login/normal_login.dart';
 import 'package:pfe_parking_admin/screens/parkings/parking_list.dart';
-import 'package:pfe_parking_admin/screens/users/users.dart';
+import 'package:pfe_parking_admin/screens/userList/users.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 final shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -52,11 +53,17 @@ class AppRouter {
                 ),
               ]),
           GoRoute(
-            path: '/users',
-            builder: (BuildContext context, GoRouterState state) {
-              return const Users();
-            },
-          ),
+              path: '/users',
+              builder: (BuildContext context, GoRouterState state) {
+                return const Users();
+              },
+              routes: [
+                GoRoute(
+                  path: 'createUser',
+                  builder: (BuildContext context, GoRouterState state) =>
+                      CreateUser(),
+                ),
+              ]),
         ],
       ),
     ],
