@@ -8,7 +8,8 @@ class ParkingService {
         .snapshots()
         .map((event) => event.docs.map(
               (e) {
-                final result = Airoport.fromJson(e.data());
+                Map<String, dynamic> map = {"idAiroPort": e.id, ...e.data()};
+                final result = Airoport.fromJson(map);
                 return result;
               },
             ).toList());

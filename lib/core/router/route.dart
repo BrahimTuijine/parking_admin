@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pfe_parking_admin/models/parking_data.dart';
 import 'package:pfe_parking_admin/screens/airopors/airoport_list.dart';
+import 'package:pfe_parking_admin/screens/createParking/create_parking.dart';
 import 'package:pfe_parking_admin/screens/dashboard/app_scaffold.dart';
 import 'package:pfe_parking_admin/screens/login/normal_login.dart';
 import 'package:pfe_parking_admin/screens/parkings/parking_list.dart';
@@ -29,11 +30,27 @@ class AppRouter {
         },
         routes: <RouteBase>[
           GoRoute(
-            path: '/airoports',
-            builder: (BuildContext context, GoRouterState state) {
-              return const AiroportList();
-            },
-          ),
+              path: '/airoports',
+              builder: (BuildContext context, GoRouterState state) {
+                return const AiroportList();
+              },
+              routes: [
+                GoRoute(
+                  path: 'parkings',
+                  builder: (BuildContext context, GoRouterState state) =>
+                      ParkingList(
+                    parkingData: state.extra as ParkingData,
+                  ),
+                ),
+                GoRoute(
+                  path: 'createParking',
+                  builder: (BuildContext context, GoRouterState state) {
+                    return CreateParking(
+                      idAiroPort: state.extra as String,
+                    );
+                  },
+                ),
+              ]),
           GoRoute(
             path: '/users',
             builder: (BuildContext context, GoRouterState state) {
@@ -41,12 +58,6 @@ class AppRouter {
             },
           ),
         ],
-      ),
-      GoRoute(
-        path: '/parkings',
-        builder: (BuildContext context, GoRouterState state) => ParkingList(
-          parkingData: state.extra as ParkingData,
-        ),
       ),
     ],
   );

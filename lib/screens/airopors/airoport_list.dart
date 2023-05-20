@@ -49,11 +49,11 @@ class AiroportList extends HookWidget {
                     title: Text(snapshot.data![index].name),
                     onTap: () {
                       context.go(
-                        '/parkings',
+                        '/airoports/parkings',
                         extra: ParkingData(
-                          parkingList: snapshot.data![index].parking,
-                          airoPortName: snapshot.data![index].name,
-                        ),
+                            parkingList: snapshot.data![index].parking,
+                            airoPortName: snapshot.data![index].name,
+                            idAiroPort: snapshot.data![index].idAiroPort),
                       );
                     },
                   );

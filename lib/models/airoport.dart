@@ -10,13 +10,16 @@ Airoport airoportFromJson(String str) => Airoport.fromJson(json.decode(str));
 class Airoport {
   final String name;
   final List<Parking> parking;
+  final String idAiroPort;
 
   Airoport({
     required this.name,
     required this.parking,
+    required this.idAiroPort,
   });
 
   factory Airoport.fromJson(Map<String, dynamic> json) => Airoport(
+        idAiroPort: json['idAiroPort'],
         name: json["name"],
         parking:
             List<Parking>.from(json["parking"].map((x) => Parking.fromJson(x))),
