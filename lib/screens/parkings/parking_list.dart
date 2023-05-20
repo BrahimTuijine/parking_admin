@@ -36,6 +36,7 @@ class ParkingList extends HookWidget {
         ),
       ),
       body: ListView.builder(
+        shrinkWrap: true,
         itemCount: parkingData.parkingList.length,
         itemBuilder: (BuildContext context, int index) {
           return ParkingListTile(

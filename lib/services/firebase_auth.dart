@@ -8,7 +8,6 @@ class FireBase {
           .signInWithEmailAndPassword(email: username, password: password);
       return credential;
     } on FirebaseAuthException catch (e) {
-      print(e);
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
         return null;
       }

@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pfe_parking_admin/core/widgets/button.dart';
 import 'package:uuid/uuid.dart';
@@ -38,19 +39,48 @@ class CreateParking extends HookWidget {
           style: TextStyle(fontSize: 15.sp),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
-          child: Form(
-            key: formKey,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        child: Form(
+          key: formKey,
+          child: SingleChildScrollView(
             child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 10.h,
+                const SizedBox(
+                  height: 200,
                 ),
-                const CustomField(
+                CustomField(
                   hint: 'Parking name',
                   prefixIc: Icons.text_format,
+                  onSaved: (name) {
+                    parkingData['name'] = name;
+                  },
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                CustomField(
+                  hint: 'Price',
+                  prefixIc: Icons.text_format,
+                  onSaved: (price) {
+                    parkingData['price'] = price;
+                  },
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                CustomField(
+                  hint: 'location',
+                  prefixIc: Icons.text_format,
+                  onSaved: (parkingLocation) async {
+                    List<Location> locations =
+                        await locationFromAddress(parkingLocation!);
+                    print(locations);
+                  },
+                ),
+                SizedBox(
+                  height: 40.h,
                 ),
                 HookBuilder(builder: (context) {
                   final isLoading = useState<bool>(false);
