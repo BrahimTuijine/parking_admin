@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pfe_parking_admin/core/widgets/button.dart';
 import 'package:pfe_parking_admin/core/widgets/form_field.dart';
 import 'package:pfe_parking_admin/services/create_user.dart';
+import 'package:pfe_parking_admin/services/users.dart';
 
 class CreateUser extends HookWidget {
   CreateUser({Key? key}) : super(key: key);
@@ -88,6 +89,9 @@ class CreateUser extends HookWidget {
                             password: userData['password']);
 
                         if (result == null) {
+                          await UsersStore.addUser(
+                            {'email': userData['email']},
+                          );
                           if (context.mounted) {
                             context.pop();
                           }
