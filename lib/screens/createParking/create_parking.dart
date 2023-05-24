@@ -29,6 +29,8 @@ class CreateParking extends HookWidget {
     "floors": []
   };
 
+  String parkigPlace = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,12 +96,7 @@ class CreateParking extends HookWidget {
                     return null;
                   },
                   onSaved: (parkingLocation) async {
-                    List<Location> locations =
-                        await locationFromAddress(parkingLocation!);
-                    parkingData['location'] = {
-                      'lat': locations[0].latitude,
-                      'lng': locations[0].longitude
-                    };
+                    parkigPlace = parkingLocation!;
                   },
                 ),
                 SizedBox(
@@ -117,7 +114,15 @@ class CreateParking extends HookWidget {
                       // context.go('/map');
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
+
                         isLoading.value = true;
+                        List<Location> locations =
+                            await locationFromAddress(parkigPlace);
+
+                        parkingData['location'] = {
+                          'lat': locations[0].latitude,
+                          'lng': locations[0].longitude
+                        };
 
                         await FirebaseFirestore.instance
                             .collection('airports')

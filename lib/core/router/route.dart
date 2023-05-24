@@ -8,6 +8,7 @@ import 'package:pfe_parking_admin/screens/createUser/create_user.dart';
 import 'package:pfe_parking_admin/screens/dashboard/app_scaffold.dart';
 import 'package:pfe_parking_admin/screens/login/normal_login.dart';
 import 'package:pfe_parking_admin/screens/parkings/parking_list.dart';
+import 'package:pfe_parking_admin/screens/qrcode_scanner/qr_canner.dart';
 import 'package:pfe_parking_admin/screens/userList/users.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -36,11 +37,18 @@ class AppRouter {
                 return const AiroportList();
               },
               routes: [
+
                 GoRoute(
                   path: 'parkings',
                   builder: (BuildContext context, GoRouterState state) =>
                       ParkingList(
                     parkingData: state.extra as ParkingData,
+                  ),
+                ),
+                GoRoute(
+                  path: 'qr',
+                  builder: (BuildContext context, GoRouterState state) =>
+                      BarcodeScanner(
                   ),
                 ),
                 GoRoute(

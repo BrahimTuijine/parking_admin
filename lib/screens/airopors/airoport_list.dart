@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pfe_parking_admin/core/theme/theme.dart';
 import 'package:pfe_parking_admin/models/airoport.dart';
 import 'package:pfe_parking_admin/models/parking_data.dart';
 import 'package:pfe_parking_admin/services/parking.dart';
@@ -13,6 +14,16 @@ class AiroportList extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppTheme.primaryColor,
+        onPressed: () {
+          context.go('/airoports/qr');
+        },
+        child: const Icon(
+          Icons.qr_code,
+          color: Colors.white,
+        ),
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -28,7 +39,7 @@ class AiroportList extends HookWidget {
                   context.go('/normalLogin');
                 }
               } catch (e) {
-                print(e);
+                debugPrint(e.toString());
               }
             },
             icon: const Icon(Icons.logout),
