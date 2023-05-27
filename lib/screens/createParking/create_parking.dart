@@ -26,7 +26,42 @@ class CreateParking extends HookWidget {
     'price': 2.5,
     "saved": false,
     "location": {"lat": 45645646, "lng": 4564656},
-    "floors": []
+    "floors": [
+      {
+        "name": "A01",
+        "places": [
+          {"name": "A01-1", "state": false},
+          {"name": "A01-2", "state": false},
+          {"name": "A01-3", "state": false},
+          {"name": "A01-4", "state": false},
+          {"name": "A01-5", "state": false},
+          {"name": "A01-6", "state": false},
+          {"name": "A01-7", "state": false},
+          {"name": "A01-8", "state": false},
+          {"name": "A01-9", "state": false},
+          {"name": "A01-10", "state": false},
+          {"name": "A01-11", "state": false},
+          {"name": "A01-12", "state": false},
+        ]
+      },
+      {
+        "name": "B01",
+        "places": [
+          {"name": "B01-1", "state": false},
+          {"name": "B01-2", "state": false},
+          {"name": "B01-3", "state": false},
+          {"name": "B01-4", "state": false},
+          {"name": "B01-5", "state": false},
+          {"name": "B01-6", "state": false},
+          {"name": "B01-7", "state": false},
+          {"name": "B01-8", "state": false},
+          {"name": "B01-9", "state": false},
+          {"name": "B01-10", "state": false},
+          {"name": "B01-11", "state": false},
+          {"name": "B01-12", "state": false},
+        ]
+      }
+    ]
   };
 
   String parkigPlace = '';
