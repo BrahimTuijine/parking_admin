@@ -1,12 +1,10 @@
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:pfe_parking_admin/screens/qrcode_scanner/scan_animation.dart';
 import 'package:pfe_parking_admin/screens/qrcode_scanner/scanner_overlay.dart';
+import 'package:pfe_parking_admin/services/qr_code_service.dart';
 
 class BarcodeScanner extends HookWidget {
   BarcodeScanner({Key? key}) : super(key: key);
@@ -32,67 +30,70 @@ class BarcodeScanner extends HookWidget {
     }, const []);
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(Icons.arrow_back),
-        ),
-        
-       
-        actions: [
-          IconButton(
-            color: Colors.white,
-            icon: ValueListenableBuilder(
-              valueListenable: cameraController.torchState,
-              builder: (context, state, child) {
-                switch (state) {
-                  case TorchState.off:
-                    return const Icon(Icons.flash_off, color: Colors.grey);
-                  case TorchState.on:
-                    return const Icon(Icons.flash_on, color: Colors.white);
-                }
-              },
-            ),
-            iconSize: 32.0,
-            onPressed: () => cameraController.toggleTorch(),
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back),
           ),
-        ],
-      ),
-      body: Stack(
-            children: [
-              MobileScanner(
-                controller: cameraController,
-                onDetect: (capture) {
-                  final List<Barcode> barcodes = capture.barcodes;
-
-                  if (barcodes.isNotEmpty) {
-                    if (isScanedOnce == false) {
-                      print(barcodes[0].rawValue!);
-                
-
-                      isScanedOnce = true;
-                    }
+          actions: [
+            IconButton(
+              color: Colors.white,
+              icon: ValueListenableBuilder(
+                valueListenable: cameraController.torchState,
+                builder: (context, state, child) {
+                  switch (state) {
+                    case TorchState.off:
+                      return const Icon(Icons.flash_off, color: Colors.grey);
+                    case TorchState.on:
+                      return const Icon(Icons.flash_on, color: Colors.white);
                   }
                 },
               ),
+              iconSize: 32.0,
+              onPressed: () => cameraController.toggleTorch(),
+            ),
+          ],
+        ),
+        body: Stack(
+          children: [
+            MobileScanner(
+              controller: cameraController,
+              onDetect: (capture) async {
+                final List<Barcode> barcodes = capture.barcodes;
 
-              QRScannerOverlay(
-                overlayColour: Colors.black.withOpacity(.5),
-              ),
+                if (barcodes.isNotEmpty) {
+                  if (isScanedOnce == false) {
+                    final result = await FirebaseQrCode.getPaymentWithId(
+                        barcodes[0].rawValue!);
+                    if (result != null) {
+                      print(result);
+                      if (context.mounted) {
+                        context.go("/airoports/qrCode", extra: result);
+                      }
+                    }
+                    isScanedOnce = true;
+                    // if (context.mounted) {
+                    //   context.pop();
+                    // }
+                  }
+                }
+              },
+            ),
 
-              
-              ScannerAnimation(
-                animation: animationController,
-                scanningColor: Colors.cyan,
-                scanningHeightOffset: 900,
-              ),
+            QRScannerOverlay(
+              overlayColour: Colors.black.withOpacity(.5),
+            ),
 
-              // AnimatedPositioned(height: 40,child: Image.asset('assets/images/img_24.png'),duration: Duration(microseconds: 200),),
-            ],
-          )
-        
-    );
+            ScannerAnimation(
+              animation: animationController,
+              scanningColor: Colors.cyan,
+              scanningHeightOffset: 900,
+            ),
+
+            // AnimatedPositioned(height: 40,child: Image.asset('assets/images/img_24.png'),duration: Duration(microseconds: 200),),
+          ],
+        ));
   }
 }

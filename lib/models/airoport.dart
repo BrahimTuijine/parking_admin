@@ -45,7 +45,7 @@ class Parking {
 
   factory Parking.fromJson(Map<String, dynamic> json) => Parking(
         name: json["name"],
-        price: json["price"],
+        price: json["price"]?.toDouble(),
         id: json["id"],
         saved: json["saved"],
         location: Location.fromJson(json["location"]),

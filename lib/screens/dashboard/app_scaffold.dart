@@ -14,6 +14,8 @@ class _AppScaffoldState extends State<AppScaffold> {
     switch (value) {
       case 1:
         return context.go('/users');
+      case 2:
+        return context.go("/payments");
       default:
         return context.go('/airoports');
     }
@@ -28,6 +30,10 @@ class _AppScaffoldState extends State<AppScaffold> {
 
     if (location.startsWith('/users')) {
       return 1;
+    }
+
+    if (location.startsWith('/payments')) {
+      return 2;
     }
     return 0;
   }
@@ -48,6 +54,7 @@ class _AppScaffoldState extends State<AppScaffold> {
           BottomNavigationBarItem(
               icon: Icon(Icons.dashboard), label: 'Airoports'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Users'),
+          BottomNavigationBarItem(icon: Icon(Icons.payment), label: 'Payments'),
         ],
       ),
     );
