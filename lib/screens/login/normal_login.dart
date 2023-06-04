@@ -118,6 +118,7 @@ class NormalLogin extends HookWidget {
                           }
                         } else {
                           if (context.mounted) {
+                            print("hi");
                             context.go('/airoports');
                           }
                         }

@@ -51,6 +51,15 @@ class Parking {
         location: Location.fromJson(json["location"]),
         floors: List<Floor>.from(json["floors"].map((x) => Floor.fromJson(x))),
       );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "price": price,
+        "id": id,
+        "saved": saved,
+        "location": location.toJson(),
+        "floors": floors.map((e) => e.toJson()).toList(),
+      };
 }
 
 class Floor {
@@ -66,6 +75,11 @@ class Floor {
         name: json["name"],
         places: List<Place>.from(json["places"].map((x) => Place.fromJson(x))),
       );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "places": places.map((e) => e.toJson()).toList(),
+      };
 }
 
 class Place {
@@ -81,6 +95,11 @@ class Place {
         name: json["name"],
         state: json["state"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "state": state,
+      };
 }
 
 class Location {
@@ -96,4 +115,9 @@ class Location {
         lat: json["lat"]?.toDouble(),
         lng: json["lng"]?.toDouble(),
       );
+
+  Map<String, dynamic> toJson() => {
+        "lat": lat,
+        "lng": lng,
+      };
 }
